@@ -99,6 +99,10 @@ table {
     border-bottom: 1px solid #000;
 }
 
+.subHeading {
+    font-size: 1.3rem;
+}
+
 @media screen and (max-width: 850px) {
     .imgBoard {
         grid-template-columns: repeat(3, 1fr);

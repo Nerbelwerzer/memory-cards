@@ -8,7 +8,6 @@ const App = () => {
   const [highScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-
   useEffect(() => {
     if (gameOver) {
       alert('you lose');
