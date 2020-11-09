@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import shuffle from 'shuffle-array'
 
-function ImageBoard() {
+function ImageBoard(props) {
   const [images, setImages] = useState([
     { image: './assets/1.jpg', alt: '1', clicked: false },
     { image: './assets/2.jpg', alt: '2', clicked: false },
@@ -17,22 +17,31 @@ function ImageBoard() {
     { image: './assets/12.jpg', alt: '12', clicked: false }
   ])
 
+  const handleClick = (index) => {
+    if (!images[index].clicked) {
+      props.addPoint()
+      setImages(images[index].clicked = true);
+    } else {
+      resetImages()
+      props.gameOver(true)
+    }
+    shuffleImages();
+  }
+
   const shuffleImages = () => {
     setImages([...shuffle(images)])
   }
 
-  const handleClick = (index) => {
-    let arr = [...images]
-    arr[index].clicked = true
-    setImages(arr)
-
-    shuffleImages()
+  const resetImages = () => {
+    images.forEach((img) => {
+      img.clicked = false
+    })
   }
 
   return (
     <div className="imgBoard">
       { images.map((img, i) => (
-        <div className="imgCard" onClick={ () => handleClick(i) }>
+        <div className="imgCard" onClick={() => handleClick(i)}>
           <img src={img.image} alt={img.alt} />
         </div>
       ))}
